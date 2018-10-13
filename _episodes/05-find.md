@@ -293,8 +293,8 @@ Miscellaneous:
 > ~~~
 > {: .source}
 >
-> She wants to write a shell script that takes a species as the first command-line argument 
-> and a directory as the second argument. The script should return one file called `species.txt` 
+> She wants to write a shell command that, given a species, 
+> returns one file called `species.txt` 
 > containing a list of dates and the number of that species seen on each date.
 > For example using the data shown above, `rabbit.txt` would contain:
 > 
@@ -335,50 +335,6 @@ Miscellaneous:
 > > $ bash count-species.sh bear .
 > > ```
 > > {: .language-bash}
-> {: .solution}
-{: .challenge}
-
-> ## Little Women
->
-> You and your friend, having just finished reading *Little Women* by
-> Louisa May Alcott, are in an argument.  Of the four sisters in the
-> book, Jo, Meg, Beth, and Amy, your friend thinks that Jo was the
-> most mentioned.  You, however, are certain it was Amy.  Luckily, you
-> have a file `LittleWomen.txt` containing the full text of the novel
-> (`data-shell/writing/data/LittleWomen.txt`).
-> Using a `for` loop, how would you tabulate the number of times each
-> of the four sisters is mentioned?
->
-> Hint: one solution might employ
-> the commands `grep` and `wc` and a `|`, while another might utilize
-> `grep` options.
-> There is often more than one way to solve a programming task, so a
-> particular solution is usually chosen based on a combination of
-> yielding the correct result, elegance, readability, and speed.
->
-> > ## Solutions
-> > ```
-> > for sis in Jo Meg Beth Amy
-> > do
-> > 	echo $sis:
-> >	grep -ow $sis LittleWomen.txt | wc -l
-> > done
-> > ```
-> > {: .source}
-> >
-> > Alternative, slightly inferior solution:
-> > ```
-> > for sis in Jo Meg Beth Amy
-> > do
-> > 	echo $sis:
-> >	grep -ocw $sis LittleWomen.txt
-> > done
-> > ```
-> > {: .source}
-> >
-> > This solution is inferior because `grep -c` only reports the number of lines matched.
-> > The total number of matches reported by this method will be lower if there is more
-> > than one match per line.
 > {: .solution}
 {: .challenge}
 
@@ -643,7 +599,7 @@ about them."
 
 > ## `find` Pipeline Reading Comprehension
 >
-> Write a short explanatory comment for the following shell script:
+> Write a short explanatory comment for the following shell command:
 >
 > ~~~
 > wc -l $(find . -name '*.dat') | sort -n

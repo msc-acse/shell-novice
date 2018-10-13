@@ -411,7 +411,7 @@ cp unicorn.dat original-unicorn.dat
 Since the `cp` command does not normally produce any output, it's hard to check 
 that the loop is doing the correct thing. By prefixing the command with `echo` 
 it is possible to see each command as it _would_ be executed. The following diagram 
-shows what happens when the modified script is executed, and demonstrates how the 
+shows what happens when the modified command is executed, and demonstrates how the 
 judicious use of `echo` is a good debugging technique.
 
 ![For Loop in Action](../fig/shell_script_for_loop_flow_chart.svg)
@@ -499,7 +499,7 @@ $ for datafile in NENE*[AB].txt; do bash goostats $datafile stats-$datafile; don
 When she presses Enter,
 the shell runs the modified command.
 However, nothing appears to happen --- there is no output.
-After a moment, Nelle realizes that since her script doesn't print anything to the screen any longer,
+After a moment, Nelle realizes that since her command doesn't print anything to the screen any longer,
 she has no idea whether it is running, much less how quickly.
 She kills the running command by typing `Ctrl-C`,
 uses up-arrow to repeat the command,
@@ -529,7 +529,7 @@ NENE01736A.txt
 
 1518 times 5 seconds,
 divided by 60,
-tells her that her script will take about two hours to run.
+tells her that her command will take about two hours to run.
 As a final check,
 she opens another terminal window,
 goes into `north-pacific-gyre/2012-07-03`,
@@ -577,6 +577,50 @@ so she decides to get some coffee and catch up on her reading.
 > `less !$` to look at the file `stats-NENE01729B.txt`, which is
 > quicker than doing up-arrow and editing the command-line.
 {: .callout}
+
+> ## Little Women
+>
+> You and your friend, having just finished reading *Little Women* by
+> Louisa May Alcott, are in an argument.  Of the four sisters in the
+> book, Jo, Meg, Beth, and Amy, your friend thinks that Jo was the
+> most mentioned.  You, however, are certain it was Amy.  Luckily, you
+> have a file `LittleWomen.txt` containing the full text of the novel
+> (`data-shell/writing/data/LittleWomen.txt`).
+> Using a `for` loop, how would you tabulate the number of times each
+> of the four sisters is mentioned?
+>
+> Hint: one solution might employ
+> the commands `grep` and `wc` and a `|`, while another might utilize
+> `grep` options.
+> There is often more than one way to solve a programming task, so a
+> particular solution is usually chosen based on a combination of
+> yielding the correct result, elegance, readability, and speed.
+>
+> > ## Solutions
+> > ```
+> > for sis in Jo Meg Beth Amy
+> > do
+> > 	echo $sis:
+> >	grep -ow $sis LittleWomen.txt | wc -l
+> > done
+> > ```
+> > {: .source}
+> >
+> > Alternative, slightly inferior solution:
+> > ```
+> > for sis in Jo Meg Beth Amy
+> > do
+> > 	echo $sis:
+> >	grep -ocw $sis LittleWomen.txt
+> > done
+> > ```
+> > {: .source}
+> >
+> > This solution is inferior because `grep -c` only reports the number of lines matched.
+> > The total number of matches reported by this method will be lower if there is more
+> > than one match per line.
+> {: .solution}
+{: .challenge}
 
 > ## Saving to a File in a Loop - Part One
 >
